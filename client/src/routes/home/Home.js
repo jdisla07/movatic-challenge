@@ -1,8 +1,9 @@
 import React from 'react';
+import Page from "../../components/page/Page";
 
 function Home() {
     return (
-        <div>hello from home</div>
+        <Page spaceName={"Home Page"} content={<div>Hello world</div>} />
     );
 }
 
