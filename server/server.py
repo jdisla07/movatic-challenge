@@ -19,4 +19,4 @@ def get_station_by_id(system, station_id):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(host='0.0.0.0')
