@@ -3,10 +3,12 @@ import PageComponent from "../../components/page/PageComponent";
 import TableComponent from "../../components/table/TableComponent";
 import SelectComponent from "../../components/select/SelectComponent";
 import { SELECT_OPTIONS, TABLE_COLUMNS } from "./assets/HomeConstans";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [system, setSystem] = useState(null);
   const [stations, setStations] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setSystem(JSON.parse(localStorage.getItem("system")));
@@ -25,7 +27,7 @@ function Home() {
   }, [system]);
 
   const onRowClick = (station_id, station_name) => {
-    console.log(station_id, station_name);
+    navigate(`/station/${system.value}/${station_id}/${station_name}`);
   };
 
   const onSelectChange = (data) => {
