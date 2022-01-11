@@ -2,13 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import { AppBar, Toolbar, Typography, Box } from "@material-ui/core";
 
-Page.propTypes = {
+PageComponent.propTypes = {
   spaceName: PropTypes.string.isRequired,
   toolbar: PropTypes.node,
   content: PropTypes.node,
 };
 
-function Page({ spaceName, content, toolbar }) {
+function PageComponent({ spaceName, content, toolbar }) {
   return (
     <React.Fragment>
       <AppBar position={"static"}>
@@ -28,4 +28,4 @@ function Page({ spaceName, content, toolbar }) {
   );
 }
 
-export default Page;
+export default PageComponent;

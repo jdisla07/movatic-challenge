@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
-import Page from "../../components/page/Page";
+import PageComponent from "../../components/page/PageComponent";
 import TableComponent from "../../components/table/TableComponent";
-import getColumns from "./assets/StationsTableColumns";
+import SelectComponent from "../../components/select/SelectComponent";
+import { SELECT_OPTIONS, TABLE_COLUMNS } from "./assets/HomeConstans";
 
 function Home() {
-  const [system, setSystem] = useState({
-    value: "bcycle_mcallen",
-    label: "bcycle_mcallen",
-  });
+  const [system, setSystem] = useState(null);
   const [stations, setStations] = useState([]);
-  
+
+  useEffect(() => {
+    setSystem(JSON.parse(localStorage.getItem("system")));
+  }, []);
+
   useEffect(() => {
     async function getStations() {
       if (system) {
@@ -26,15 +28,28 @@ function Home() {
     console.log(station_id, station_name);
   };
 
+  const onSelectChange = (data) => {
+    localStorage.setItem("system", JSON.stringify(data));
+    setSystem(data);
+  };
+
   return (
-    <Page
+    <PageComponent
       spaceName={"Home Page"}
       content={
-        <TableComponent
-          onRowClick={onRowClick}
-          rows={stations}
-          columns={getColumns()}
-        />
+        <React.Fragment>
+          <SelectComponent
+            defaultValue={system ? system.label : ""}
+            tag={"Select System"}
+            onChange={onSelectChange}
+            options={SELECT_OPTIONS}
+          />
+          <TableComponent
+            onRowClick={onRowClick}
+            rows={stations}
+            columns={TABLE_COLUMNS}
+          />
+        </React.Fragment>
       }
     />
   );
